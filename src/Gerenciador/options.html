@@ -1,0 +1,73 @@
+<html>
+   <head>
+		<link rel="stylesheet" type="text/css" href="/css/smoothness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="/lib/uniform/uniform.default.css" />
+		<link rel="stylesheet" type="text/css" href="/css/opensans/opensans.css" >
+		<link rel="stylesheet" type="text/css" href="/css/font-awesome-4.6.3/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="/css/options_main_page.css" />
+		<!--link rel="stylesheet" type="text/css" href="user_preferences.css" /-->
+
+      <!--link rel="stylesheet" type="text/css" href="options.css"/-->
+
+		<script src="/lib/jquery-2.0.3.min.js" type="text/javascript"></script>
+		<script src="/lib/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
+		<script src="/lib/uniform/jquery.uniform.js" type="text/javascript"></script>
+		<!--script src="/lib/custom_i18n.js" type="text/javascript"></script-->
+		<script src="/lib/i18n_translator.js" type="text/javascript"></script>
+		<script src="/lib/object-watch.js" type="text/javascript"></script>
+
+		<title i18n="Options"></title>
+   </head>
+   <body>
+		<div id="options-box" class="box">
+			<h1 i18n="Options"></h1>
+			<hr>
+			<div class="formLine">
+				<input type="checkbox" class="checkbox" id="NOT"/>
+				<label for="NOT" class="formLabel" i18n="NOT">Mostrar Notificação</label>
+			</div>
+			<div class="formLine">
+				<input type="checkbox" class="checkbox" id="PDF"/>
+				<label for="PDF" class="formLabel" i18n="PDF">Abrir PDF no Navegador</label>
+			</div>
+
+			<div class="formLine">&nbsp;</div>
+			<div class="formLine">
+				<label for="EMP" class="formLabel" i18n="EMP">Código da Empresa</label>
+			</div>
+			<div class="formLine">
+				<input type="textinput" class="textinput" id="EMP"/>
+			</div>
+			<div class="formLine">
+				<label for="IP" class="formLabel" i18n="IP">Informe o IP Local do Chrome</label>
+			</div>
+			<div class="formLine">
+				<input type="textinput" class="textinput" id="IP"/>
+			</div>
+
+			<div class="formLine">
+				<label for="URL" class="formLabel" i18n="URL">Informe a URL do serviço Siare</label>
+			</div>
+			<div class="formLine">
+				<input type="textinput" class="textinput" id="URL"/>
+			</div>
+			<div class="formLine">&nbsp;</div>
+
+			<div class="formLine">
+				<label for="PL" class="formLabel" i18n="PL">Informe o nome do arquivo PL do serviço Siare</label>
+			</div>
+			<div class="formLine">
+				<input type="textinput" class="textinput" id="PL"/>
+			</div>
+			<div class="formLine">&nbsp;</div>
+
+
+			<div class="formLine">
+            <button id="save">Salvar</button>
+			</div>
+
+	   </div>
+      <div id="status"></div>
+      <script src="options.js"></script>
+   </body>
+</html>

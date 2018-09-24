@@ -1,0 +1,49 @@
+{
+   "name": "Gerenciador de Impressao Siare Web",
+   "version": "0.0.1",
+   
+   "description": "Monitora arquivos gerados pelo Siare para Impressao",
+   "icons" : {
+      "16" : "icon128.png",
+      "48" : "icon128.png",
+      "128" : "icon128.png"
+   },
+
+	"default_locale": "pt_BR",
+
+	"homepage_url": "http://www.procyon.com.br/",
+
+   "browser_action": {
+      "default_popup": "popup.html"
+   },
+
+   "background": {
+       "scripts": ["popup.js",
+                   "/lib/jquery-2.0.3.min.js"],
+       "persistent": true
+   },
+   
+   "options_page": "options.html",
+   
+   "content_scripts": [ {
+        "js": [ "popup.js" ],
+        "matches": [ "<all_urls>" ]
+   } ],
+   
+   "permissions": [
+      "tabs",
+      "alarms",
+      "<all_urls>",
+      "webNavigation",
+      "notifications",
+		"\u003Call_urls\u003E",
+		"contextMenus",
+		"unlimitedStorage",
+		"storage",
+		"clipboardWrite"
+   ],
+
+	"minimum_chrome_version": "18",
+   "manifest_version": 2
+
+}

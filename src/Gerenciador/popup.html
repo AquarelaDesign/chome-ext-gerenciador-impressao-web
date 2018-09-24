@@ -1,0 +1,64 @@
+<html>
+   <head>
+      <title>Gerenciador de Impressao Web Siare</title>
+      <style>
+         /*
+         body {
+            font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+            font-size: 100%;
+            //width:300px;
+         }
+         #status {
+            //white-space: pre;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            //max-width: 300px;
+         }
+         #search {
+            width:300px;
+         }
+         */
+      </style>
+
+      <link rel="stylesheet" type="text/css" href="style.css"/>
+		<link rel="stylesheet" type="text/css" href="/css/smoothness/jquery-ui-1.10.4.custom.min.css"/>
+		<link rel="stylesheet" type="text/css" href="/css/font-awesome-4.6.3/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="/css/popup.css">
+		<link rel="stylesheet" type="text/css" href="/css/tabela_web.css">
+
+		<script type="text/javascript" src="/lib/jquery-2.0.3.min.js"></script>
+		<script type="text/javascript" src="/lib/jquery-ui-1.10.4.custom.min.js"></script>
+
+      <script type="text/javascript" src="popup.js"></script>
+   </head>
+   <body class="unselectable">
+		<div id="loader-container1">
+   		<div id="TituloTabela" align="center">
+   			<h2 id="TitTab">Relatórios Gerados</h2>
+   			<hr width="600px">
+   		</div>
+   		<table id="Tabela" cellspacing="15" cellpadding="15"></table>
+		</div>
+		
+		<div id="loader-container">
+			<i class="fa fa-cog fa-spin fa-3x"></i>
+		</div>
+		
+		<div id="alert_wrapper">
+			<div id="alert_background"></div>
+			<div id="alert_box">
+				<div id="alert_title">
+					<p id="alert_title_p"></p>
+				</div>
+				<div id="alert_buttons">
+					<div id="alert_ok" class="alert_button" i18n="yes">
+					</div>
+					<div id="alert_cancel" class="alert_button" i18n="no">
+					</div>
+				</div>
+			</div>
+		</div>
+		
+   </body>
+</html>
+
