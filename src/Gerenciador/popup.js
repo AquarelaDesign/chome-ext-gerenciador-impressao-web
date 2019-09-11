@@ -7,18 +7,9 @@
    var NOT = '';
    var IP  = '';
    var PL  = '';
-   var Ip = "";
 
    var response     = document.getElementById('response');
    var searchButton = document.getElementById('buttonSearch');
-
-   getIPs(function(ip){
-      Ip = ip;
-   });
-
-   if (Ip != "" && IP != Ip) {
-      IP = Ip;
-   }
 
    AtualizaGet();
 
@@ -32,7 +23,7 @@
       
       if (URL != "" && URL != null) {
          if (PL == "") {
-            PL = "siarewebpy.pl";
+            PL = "siareweb.pl";
          }
 
          var url = URL
@@ -72,15 +63,9 @@
          if (items.ip != undefined && items.ip != null) {
             IP = items.ip;
          } else {
-            IP =  Ip;
+            IP = findIP(addIP);
          }
-         
-         if (Ip != "" && IP != Ip) {
-            IP = Ip;
-         }
-         
-         //console.log("01=>IP", IP, Ip);
-         
+
          if (items.pl != undefined && items.pl != null) {
             PL = items.pl;
          } else {
@@ -110,7 +95,7 @@
             tabTitle = tabs[i].title;
             tabId = tabs[i].id;
             tabUrl = tabs[i].url;
-            //console.log(tabs[i]);
+            console.log(tabs[i]);
          }
       });
       
@@ -210,15 +195,6 @@
 
    // cria a lista com o resultado da busca
    function getList(json) {
-
-      if (Ip != "" && IP != Ip) {
-         IP = Ip;
-      }
-      
-      //console.log("02=>IP", IP);
-
-      document.getElementById("TitTab").innerHTML = "Relat&oacute;rios Gerados ("+IP+")";
-
       if (json != null) {
          if (json.dtbimp !== undefined) {
             AtualizaGet();
@@ -422,88 +398,36 @@
      });
    }
   
-   //get the IP addresses associated with an account
-   function getIPs(callback){
+   function findIP(onNewIP) { //  onNewIp - your listener function for new IPs
+      var myPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection; //compatibility for firefox and chrome
+      var pc = new myPeerConnection({iceServers: []}),
+          noop = function() {},
+          localIPs = {},
+          ipRegex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g,
+          key;
 
-       //console.log("03=>IP", Ip, callback);
+      function ipIterate(ip) {
+         if (!localIPs[ip]) onNewIP(ip);
+            localIPs[ip] = true;
+         }
+         pc.createDataChannel(""); //create a bogus data channel
+         pc.createOffer(function(sdp) {
+            sdp.sdp.split('\n').forEach(function(line) {
+            if (line.indexOf('candidate') < 0) return;
+            line.match(ipRegex).forEach(ipIterate);
+         });
+         
+         pc.setLocalDescription(sdp, noop, noop);
+      }, noop); // create offer and set local description
+      
+      pc.onicecandidate = function(ice) { //listen for candidate events
+         if (!ice || !ice.candidate || !ice.candidate.candidate || !ice.candidate.candidate.match(ipRegex)) return;
+         ice.candidate.candidate.match(ipRegex).forEach(ipIterate);
+      };
+   }  
 
-       var ip_dups = {};
-
-       //compatibility for firefox and chrome
-       var RTCPeerConnection = window.RTCPeerConnection
-           || window.mozRTCPeerConnection
-           || window.webkitRTCPeerConnection;
-       var useWebKit = !!window.webkitRTCPeerConnection;
-
-       //bypass naive webrtc blocking using an iframe
-       if(!RTCPeerConnection){
-           //NOTE: you need to have an iframe in the page right above the script tag
-           //
-           //<iframe id="iframe" sandbox="allow-same-origin" style="display: none"></iframe>
-           //<script>...getIPs called in here...
-           //
-           var win = iframe.contentWindow;
-           RTCPeerConnection = win.RTCPeerConnection
-               || win.mozRTCPeerConnection
-               || win.webkitRTCPeerConnection;
-           useWebKit = !!win.webkitRTCPeerConnection;
-       }
-
-       //minimal requirements for data connection
-       var mediaConstraints = {
-           optional: [{RtpDataChannels: true}]
-       };
-
-       var servers = {iceServers: [{urls: "stun:stun.services.mozilla.com"}]};
-
-       //construct a new RTCPeerConnection
-       var pc = new RTCPeerConnection(servers, mediaConstraints);
-
-       function handleCandidate(candidate){
-           //match just the IP address
-           var ip_regex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/
-           //var ip_addr = ip_regex.exec(candidate)[1];
-           var ip_addr;
-           if (ip_regex.exec(candidate) != null || ip_regex.exec(candidate) != undefined) {
-              ip_addr = ip_regex.exec(candidate)[1];
-
-              //remove duplicates
-              if(ip_dups[ip_addr] === undefined)
-                  callback(ip_addr);
-
-              ip_dups[ip_addr] = true;
-            }
-       }
-
-       //listen for candidate events
-       pc.onicecandidate = function(ice){
-
-           //skip non-candidate events
-           if(ice.candidate)
-               handleCandidate(ice.candidate.candidate);
-       };
-
-       //create a bogus data channel
-       pc.createDataChannel("");
-
-       //create an offer sdp
-       pc.createOffer(function(result){
-
-           //trigger the stun server request
-           pc.setLocalDescription(result, function(){}, function(){});
-
-       }, function(){});
-
-       //wait for a while to let everything done
-       setTimeout(function(){
-           //read candidate info from local description
-           var lines = pc.localDescription.sdp.split('\n');
-
-           lines.forEach(function(line){
-               if(line.indexOf('a=candidate:') === 0)
-                   handleCandidate(line);
-           });
-       }, 1000);
+   function addIP(Ip) {
+      ip = Ip;
    }
 
    checkAlarm();
