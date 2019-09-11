@@ -1,73 +1,90 @@
 <html>
-   <head>
-		<link rel="stylesheet" type="text/css" href="/css/smoothness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="/lib/uniform/uniform.default.css" />
-		<link rel="stylesheet" type="text/css" href="/css/opensans/opensans.css" >
-		<link rel="stylesheet" type="text/css" href="/css/font-awesome-4.6.3/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="/css/options_main_page.css" />
-		<!--link rel="stylesheet" type="text/css" href="user_preferences.css" /-->
 
-      <!--link rel="stylesheet" type="text/css" href="options.css"/-->
+<head>
+    <script type="text/javascript" src="lib/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="lib/jquery-ui-1.12.1.custom/jquery-ui.min.css" />
+    <script type="text/javascript" src="lib/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 
-		<script src="/lib/jquery-2.0.3.min.js" type="text/javascript"></script>
-		<script src="/lib/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
-		<script src="/lib/uniform/jquery.uniform.js" type="text/javascript"></script>
-		<!--script src="/lib/custom_i18n.js" type="text/javascript"></script-->
-		<script src="/lib/i18n_translator.js" type="text/javascript"></script>
-		<script src="/lib/object-watch.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="lib/uniform/uniform.default.css" />
+    <link rel="stylesheet" type="text/css" href="css/opensans/opensans.css" />
+    <link rel="stylesheet" type="text/css" href="css/font-awesome-4.6.3/css/font-awesome.min.css" />
+    <!--link rel="stylesheet" type="text/css" href="css/options_main_page.css" /-->
+    <link rel="stylesheet" type="text/css" href="css/options.css" />
 
-		<title i18n="Options"></title>
-   </head>
-   <body>
-		<div id="options-box" class="box">
-			<h1 i18n="Options"></h1>
-			<hr>
-			<div class="formLine">
-				<input type="checkbox" class="checkbox" id="NOT"/>
-				<label for="NOT" class="formLabel" i18n="NOT">Mostrar Notificação</label>
-			</div>
-			<div class="formLine">
-				<input type="checkbox" class="checkbox" id="PDF"/>
-				<label for="PDF" class="formLabel" i18n="PDF">Abrir PDF no Navegador</label>
-			</div>
+    <script src="lib/uniform/jquery.uniform.js" type="text/javascript"></script>
+    <script src="lib/i18n_translator.js" type="text/javascript"></script>
+    <script src="lib/object-watch.js" type="text/javascript"></script>
 
-			<div class="formLine">&nbsp;</div>
-			<div class="formLine">
-				<label for="EMP" class="formLabel" i18n="EMP">Código da Empresa</label>
-			</div>
-			<div class="formLine">
-				<input type="textinput" class="textinput" id="EMP"/>
-			</div>
-			<div class="formLine">
-				<label for="IP" class="formLabel" i18n="IP">Informe o IP Local do Chrome</label>
-			</div>
-			<div class="formLine">
-				<input type="textinput" class="textinput" id="IP"/>
-			</div>
+    <title i18n="Opções"></title>
+</head>
 
-			<div class="formLine">
-				<label for="URL" class="formLabel" i18n="URL">Informe a URL do serviço Siare</label>
-			</div>
-			<div class="formLine">
-				<input type="textinput" class="textinput" id="URL"/>
-			</div>
-			<div class="formLine">&nbsp;</div>
+<body>
+    <div id="options-box" class="box">
+        <h2 i18n="Opções">Opções</h2>
+        <hr>
+        <div class="formLine">
+            <input type="checkbox" class="checkbox" id="NOT" />
+            <div class="tooltip">
+                <label for="NOT" class="formLabel" i18n="NOT">Mostrar Notificação</label>
+                <span class="tooltiptext">Exibe/Oculta as Notificações</span>
+            </div>
+        </div>
+        <div class="formLine">
+            <input type="checkbox" class="checkbox" id="PDF" placeholder="Abre/Não Abre o PDF na Aba do Navegador" />
+            <label for="PDF" class="formLabel" i18n="PDF">Abrir PDF no Navegador</label>
+        </div>
+        <div class="formLine">
+            <input type="checkbox" class="checkbox" id="TMPMAN" placeholder="Habilita a busca pelo tempo definido" />
+            <label for="TMPMAN" class="formLabel" i18n="TMPMAN">Tempo Manual</label>
+        </div>
+        <div class="formLine">
+            <label for="amount" class="formLabel" i18n="TMP">Tempo para Busca: </label>
+            <input type="text" id="horas" readonly style="border:0; color:#181cfa; font-weight:bold;">
+            <input type="hidden" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+        </div>
+        <div class="formLine">
+            <div id="slider-range-max" placeholder="Tempo do ciclo para busca"></div>
+        </div>
 
-			<div class="formLine">
-				<label for="PL" class="formLabel" i18n="PL">Informe o nome do arquivo PL do serviço Siare</label>
-			</div>
-			<div class="formLine">
-				<input type="textinput" class="textinput" id="PL"/>
-			</div>
-			<div class="formLine">&nbsp;</div>
+        <div class="formLine">&nbsp;</div>
 
+        <div class="formLine">
+            <label for="EMP" class="formLabel" i18n="EMP">Código da Empresa</label>
+        </div>
+        <div class="formLine">
+            <div class="tooltip">
+                <input type="textinput" class="textinput" id="EMP" style="width: 50px;" maxlength="2" />
+                <span class="tooltiptext">Código da Empresa</span>
+            </div>
+        </div>
+        <div class="formLine">
+            <label for="IP" class="formLabel" i18n="IP">Informe o IP Local do Chrome</label>
+        </div>
+        <div class="formLine">
+            <input type="textinput" class="textinput" id="IP" placeholder="IP do Usuário" />
+        </div>
+        <div class="formLine">
+            <label for="iURL" class="formLabel" i18n="iURL">Informe a URL do serviço Siare</label>
+        </div>
+        <div class="formLine">
+            <input type="textinput" class="textinput" id="iURL" style="width: 400px;" placeholder="URL para busca, TTBTGS/SWF" />
+        </div>
+        <div class="formLine">
+            <label for="PL" class="formLabel" i18n="PL">Informe o nome do arquivo PL do serviço Siare</label>
+        </div>
+        <div class="formLine">
+            <input type="textinput" class="textinput" id="PL" placeholder="URL para busca, TTBTGS/SWF" />
+        </div>
 
-			<div class="formLine">
+        <div class="formLine">&nbsp;</div>
+
+        <div class="formLine">
             <button id="save">Salvar</button>
-			</div>
+        </div>
 
-	   </div>
-      <div id="status"></div>
-      <script src="options.js"></script>
-   </body>
+    </div>
+    <div id="status"></div>
+    <script src="options.js"></script>
+</body>
+
 </html>
