@@ -8,7 +8,6 @@
    body {
       font-family: sans-serif;
       font-size: 12pt;
-      width: 800px;
       /* height: 900px; */
    }
    
@@ -66,10 +65,6 @@
    .footerrow td, .footerrow th {
       background-gradient: linear #b7cebd #f5f8f5 0 1 0 0.2;
    }
-   
-   tr {
-      height: 20pt;
-   }
 
    th {
       font-weight: bold;
@@ -82,22 +77,20 @@
    }
 
    td {
-      vertical-align: middle;
+      padding-left: 5mm;
+      vertical-align: top;
       text-align:left;
-      //padding-left: 15px;
-      //padding-right: 15px;
-      //padding-top: 5px;
-      //padding-bottom: 5px;
+      padding-right: 5mm;
+      padding-top: 0.5mm;
+      padding-bottom: 0.5mm;
    }
 
    th p {
-      text-align: left; 
-      margin:0pt;
+      text-align: left; margin:0pt;
    }
 
    td p {
-      text-align: left; 
-      margin:0pt;
+      text-align: left; margin:0pt;
    }
 
    table.widecells td {
